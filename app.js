@@ -17,6 +17,10 @@ app.use(express.urlencoded({
     extended: false
 }))
 
+//配置解析表单数据的中间件,注意：这个中间件只能解析application/json格式的表单数据
+const bodyParser = require("body-parser")
+app.use(bodyParser.json())
+
 //一定要在路由之前，封装res.cc函数
 app.use(function (req, res, next) {
     //status=0为成功，status=1为失败！默认将status的值设置为1，方便处理失败的情况
@@ -33,9 +37,9 @@ app.use(function (req, res, next) {
 
 
 //导入并使用用户路由模块
-app.use('/API_Terminal_DB', require('./router/Terminal_DB'))
+app.use('/lab_safety_API', require('./router/lab_safety_DB'))
 
 //调用app.listen方法，指定端口号并启动web服务器
-app.listen(3007, () => {
-    console.log('api server running at http://127.0.0.1:3007')
+app.listen(8000, () => {
+    console.log('api server running at http://127.0.0.1:8000')
 })
